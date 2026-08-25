@@ -460,6 +460,88 @@ html{scroll-snap-type:none!important;scroll-behavior:auto}
 
 .address{font-size:clamp(14px,3.6vw,20px);margin:4px 0 14px;color:#806f66;letter-spacing:.03em}
 
+
+/* ===== Scroll stability / anti-flicker fix ===== */
+html, body {
+  background: #f6eee7 !important;
+  overscroll-behavior-y: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(255,255,255,.95) 0, rgba(255,255,255,.45) 28%, transparent 55%),
+    linear-gradient(180deg, #fbf6f0 0%, #f4e8df 100%);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.screen {
+  background-color: #f8f1eb !important;
+  background-attachment: scroll !important;
+  isolation: isolate;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Fixed decorative layers can cause repaint flashes on mobile Safari/Chrome */
+.screen::before,
+.screen::after,
+.hero-portrait,
+.hero-portrait::before,
+.hero-portrait::after {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Disable expensive filters and blending only while scrolling on small screens */
+@media (max-width: 900px) {
+  .screen,
+  .hero,
+  .hero-portrait {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .hero .content.hero-content {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: rgba(250, 245, 239, .72) !important;
+  }
+
+  .floating-petal,
+  .petal,
+  .spark,
+  .sparkle,
+  .mountains,
+  .mountain,
+  .flower,
+  .flowers {
+    will-change: auto !important;
+  }
+}
+
+/* Respect users who prefer reduced motion and prevent repaint-heavy transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 </style>
 </head>
 <body>
