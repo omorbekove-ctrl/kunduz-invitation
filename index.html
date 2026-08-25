@@ -465,7 +465,7 @@ html{scroll-snap-type:none!important;scroll-behavior:auto}
 <body>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
   <div class="petals" id="petals" aria-hidden="true"></div>
-  <audio id="bgMusic" loop preload="metadata">
+  <audio id="bgMusic" loop autoplay playsinline preload="auto">
     <source src="music.m4a" type="audio/mp4">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
@@ -643,5 +643,62 @@ bgMusic.addEventListener('error',()=>{soundLabel.textContent='Музыка та�
 // Pointer tilt removed for smoother scrolling.
 
 </script>
-</body>
+<script>const bgMusic=document.getElementById('bgMusic');
+if(bgMusic){
+  bgMusic.volume=.32;
+  const soundBtn=document.getElementById('soundBtn');
+  const soundLabel=document.getElementById('soundLabel');
+
+  const updateMusicUI=()=>{
+    if(!soundBtn||!soundLabel)return;
+    if(bgMusic.paused){
+      soundLabel.textContent='Музыка';
+      soundBtn.classList.remove('on');
+    }else{
+      soundLabel.textContent='Музыка өчүрүү';
+      soundBtn.classList.add('on');
+    }
+  };
+
+  // Пытаемся запустить музыку сразу при открытии страницы.
+  const startMusic=async()=>{
+    try{
+      bgMusic.muted=false;
+      await bgMusic.play();
+      updateMusicUI();
+    }catch(e){
+      // Если браузер заблокировал автозвук, запускаем при первом касании/клике.
+      const unlock=async()=>{
+        try{
+          bgMusic.muted=false;
+          await bgMusic.play();
+          updateMusicUI();
+        }catch(err){}
+        ['pointerdown','touchstart','keydown'].forEach(ev=>document.removeEventListener(ev,unlock));
+      };
+      ['pointerdown','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,unlock,{once:true,passive:true}));
+    }
+  };
+
+  window.addEventListener('load',startMusic,{once:true});
+
+  if(soundBtn){
+    soundBtn.addEventListener('click',async()=>{
+      try{
+        if(bgMusic.paused){
+          bgMusic.muted=false;
+          await bgMusic.play();
+        }else{
+          bgMusic.pause();
+        }
+        updateMusicUI();
+      }catch(e){
+        soundLabel.textContent='Музыка табылган жок';
+      }
+    });
+  }
+  bgMusic.addEventListener('play',updateMusicUI);
+  bgMusic.addEventListener('pause',updateMusicUI);
+  bgMusic.addEventListener('error',()=>{if(soundLabel)soundLabel.textContent='Музыка табылган жок'});
+}</script></body>
 </html>
