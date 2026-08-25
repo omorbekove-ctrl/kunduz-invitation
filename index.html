@@ -457,11 +457,15 @@ html{scroll-snap-type:none!important;scroll-behavior:auto}
     linear-gradient(90deg,rgba(252,246,239,.82) 0%,rgba(252,246,239,.30) 44%,rgba(252,246,239,.74) 100%)}
 }
 
+
+.address{font-size:clamp(14px,3.6vw,20px);margin:4px 0 14px;color:#806f66;letter-spacing:.03em}
+
 </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
   <div class="petals" id="petals" aria-hidden="true"></div>
+  <audio id="bgMusic" src="music.mp3" loop preload="metadata"></audio>
 
   <main>
     <section class="screen hero reveal" id="home">
@@ -487,7 +491,7 @@ html{scroll-snap-type:none!important;scroll-behavior:auto}
         <p class="subtitle">Сиздерди кыз узатуу аземибизге чакырабыз</p>
         <button class="primary-btn" id="openInvite">Чакырууну ачуу <span>↓</span></button>
       </div>
-      <button class="sound-pill" id="ambienceBtn" type="button" aria-pressed="false" aria-label="Жумшак үндү күйгүзүү"><span class="sound-dot"></span><span id="soundLabel">Атмосфера</span></button>
+      <button class="sound-pill" id="ambienceBtn" type="button" aria-pressed="false" aria-label="Жумшак үндү күйгүзүү"><span class="sound-dot"></span><span id="soundLabel">Музыка</span></button>
       <p class="scroll-hint">Жылдыруу <span>⌄</span></p>
     </section>
 
@@ -533,6 +537,7 @@ html{scroll-snap-type:none!important;scroll-behavior:auto}
         <div class="divider"><span>✦</span></div>
         <p class="venue">РЕСТОРАН <strong>RIO</strong></p>
         <p class="city">Бишкек шаары</p>
+        <p class="address">Жуная Мавлянова, 2</p>
         <p class="time">16:00</p>
         <div class="divider" aria-hidden="true"><span>✦</span></div>
       </div>
@@ -599,20 +604,38 @@ function spawnPetal(){
 }
 setInterval(spawnPetal,1200);for(let i=0;i<5;i++)setTimeout(spawnPetal,i*450);
 
-// Tiny ambient chime generated locally; no external audio required.
-let audioCtx=null,ambienceTimer=null,ambienceOn=false;
-const ambienceBtn=document.querySelector('#ambienceBtn'),soundLabel=document.querySelector('#soundLabel');
-function chime(){
-  if(!audioCtx||audioCtx.state!=='running')return;
-  const now=audioCtx.currentTime;[523.25,659.25,783.99].forEach((f,i)=>{
-    const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,now+i*.12);g.gain.linearRampToValueAtTime(.025,now+i*.12+.05);g.gain.exponentialRampToValueAtTime(.0001,now+i*.12+1.8);o.connect(g).connect(audioCtx.destination);o.start(now+i*.12);o.stop(now+i*.12+1.9);
-  });
-}
+// Background music. Upload a file named music.mp3 next to index.html on GitHub Pages.
+const ambienceBtn=document.querySelector('#ambienceBtn');
+const soundLabel=document.querySelector('#soundLabel');
+const bgMusic=document.querySelector('#bgMusic');
+let ambienceOn=false;
+
+bgMusic.volume=.32;
+ambienceBtn.setAttribute('aria-label','Фондук музыканы күйгүзүү же өчүрүү');
 ambienceBtn.addEventListener('click',async()=>{
-  ambienceOn=!ambienceOn;ambienceBtn.classList.toggle('active',ambienceOn);ambienceBtn.setAttribute('aria-pressed',String(ambienceOn));soundLabel.textContent=ambienceOn?'Үн күйдү':'Атмосфера';
-  if(ambienceOn){audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();await audioCtx.resume();chime();ambienceTimer=setInterval(chime,9000)}
-  else{clearInterval(ambienceTimer);ambienceTimer=null}
+  try{
+    if(bgMusic.paused){
+      await bgMusic.play();
+      ambienceOn=true;
+      ambienceBtn.classList.add('active');
+      ambienceBtn.setAttribute('aria-pressed','true');
+      soundLabel.textContent='Музыка күйдү';
+    }else{
+      bgMusic.pause();
+      ambienceOn=false;
+      ambienceBtn.classList.remove('active');
+      ambienceBtn.setAttribute('aria-pressed','false');
+      soundLabel.textContent='Музыка';
+    }
+  }catch(e){
+    ambienceOn=false;
+    ambienceBtn.classList.remove('active');
+    ambienceBtn.setAttribute('aria-pressed','false');
+    soundLabel.textContent='music.mp3 жок';
+  }
 });
+
+bgMusic.addEventListener('error',()=>{soundLabel.textContent='music.mp3 жок'});
 
 // Pointer tilt removed for smoother scrolling.
 
