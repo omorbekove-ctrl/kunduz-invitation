@@ -92,6 +92,203 @@
 .pattern-band{opacity:.14}.side-ornament{opacity:.22}
 @media (max-width:600px){.floral{width:150px;height:150px}.floral:before{width:86px;height:86px}.floral:after{width:62px;height:62px;left:66px;top:46px}.floral .leaf{width:58px;height:22px;left:36px;top:96px}.floral-left{left:-42px;bottom:-25px}.floral-right{right:-42px;top:-22px}.screen:after{height:24%;opacity:.58}}
 
+
+/* ===== Luxury reference-inspired enhancement ===== */
+:root{
+  --rose-soft:#efd6d3;
+  --rose-deep:#b87478;
+  --pearl:#fffaf4;
+  --champagne:#e8c99f;
+  --sage2:#9faa95;
+  --mountain:#8e8992;
+  --mountain2:#c7b9b3;
+}
+
+body{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(242,216,211,.35), transparent 23%),
+    radial-gradient(circle at 88% 12%, rgba(233,201,162,.22), transparent 24%),
+    linear-gradient(#fbf7f1,#f7efe6);
+}
+
+.screen{
+  isolation:isolate;
+  border-bottom:1px solid rgba(179,138,87,.08);
+}
+
+.screen::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 12%,rgba(255,255,255,.98),rgba(255,255,255,.50) 22%,transparent 42%),
+    radial-gradient(circle at 10% 18%,rgba(244,217,212,.30),transparent 18%),
+    radial-gradient(circle at 90% 20%,rgba(243,215,194,.30),transparent 20%);
+}
+
+/* Double luxury frame */
+.ornate-frame{
+  inset:14px;
+  border:1px solid rgba(187,143,91,.42);
+  border-radius:28px;
+}
+.ornate-frame::marker{display:none}
+.ornate-frame .dummy{display:none}
+.ornate-frame:before,.ornate-frame:after{
+  z-index:3;
+  color:rgba(184,137,83,.66);
+  background:rgba(252,247,240,.76);
+  backdrop-filter:blur(2px);
+}
+.screen .ornate-frame + .side-ornament{filter:drop-shadow(0 7px 14px rgba(120,87,59,.08))}
+
+/* Fine inner border through content layer */
+.screen .content:before{
+  content:'';
+  position:absolute;
+  inset:-22px;
+  border:1px solid rgba(194,153,105,.10);
+  border-radius:34px;
+  pointer-events:none;
+  z-index:-1;
+}
+.hero .content:before{display:none}
+
+/* Mountain panorama */
+.mountain-scene{
+  position:absolute;
+  left:0;right:0;bottom:-2px;
+  height:37%;
+  z-index:1;
+  pointer-events:none;
+  opacity:.92;
+  overflow:hidden;
+}
+.mountain-scene svg{width:100%;height:100%;display:block}
+.mountain-scene .mist{animation:mistMove 15s ease-in-out infinite alternate;transform-origin:center}
+@keyframes mistMove{from{transform:translateX(-1%);opacity:.62}to{transform:translateX(1.5%);opacity:.85}}
+
+/* Floral clusters */
+.flower-cluster{
+  position:absolute;
+  width:250px;height:250px;
+  z-index:5;
+  pointer-events:none;
+  filter:drop-shadow(0 14px 24px rgba(111,75,61,.08));
+}
+.flower-cluster.left-top{left:-62px;top:-52px}
+.flower-cluster.right-top{right:-62px;top:-52px;transform:scaleX(-1)}
+.flower-cluster.left-bottom{left:-74px;bottom:-66px;transform:rotate(8deg)}
+.flower-cluster.right-bottom{right:-74px;bottom:-66px;transform:scaleX(-1) rotate(8deg)}
+.flower{
+  position:absolute;
+  width:112px;height:112px;border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%,#f1c8b8 0 7%,#f8e6df 8% 21%,transparent 22%),
+    radial-gradient(ellipse at 50% 12%,#fffaf6 0 18%,#efcfc8 19% 38%,transparent 39%),
+    radial-gradient(ellipse at 88% 50%,#fffaf6 0 18%,#f0d6d2 19% 38%,transparent 39%),
+    radial-gradient(ellipse at 50% 88%,#fffaf6 0 18%,#efd0c8 19% 38%,transparent 39%),
+    radial-gradient(ellipse at 12% 50%,#fffaf6 0 18%,#f0d6d2 19% 38%,transparent 39%);
+  opacity:.94;
+}
+.flower.f1{left:18px;top:42px;transform:scale(1.05)}
+.flower.f2{left:102px;top:18px;transform:scale(.62)}
+.flower.f3{left:118px;top:104px;transform:scale(.78)}
+.flower.f4{left:4px;top:134px;transform:scale(.54)}
+.branch{
+  position:absolute;
+  left:65px;top:104px;width:150px;height:3px;
+  background:linear-gradient(90deg,#92795f,#b59e83 55%,transparent);
+  transform:rotate(-28deg);border-radius:99px;opacity:.78;
+}
+.branch:before,.branch:after{
+  content:'';position:absolute;width:54px;height:22px;
+  border-radius:100% 0 100% 0;background:linear-gradient(90deg,#aeb7a0,#7f8b74);
+  opacity:.74;
+}
+.branch:before{left:32px;top:-17px;transform:rotate(-12deg)}
+.branch:after{left:78px;top:6px;transform:rotate(25deg) scale(.8)}
+
+/* Tiny gold botanical sprays */
+.gold-sprig{position:absolute;z-index:5;width:120px;height:60px;opacity:.56;pointer-events:none}
+.gold-sprig:before{content:'';position:absolute;left:10px;right:10px;top:30px;height:1px;background:linear-gradient(90deg,transparent,#c49a66,transparent)}
+.gold-sprig:after{content:'❦  ✦  ❦';position:absolute;inset:0;text-align:center;color:#bf9560;font-size:20px;letter-spacing:8px}
+.gold-sprig.gs-left{left:7%;bottom:15%;transform:rotate(-10deg)}
+.gold-sprig.gs-right{right:7%;top:18%;transform:scaleX(-1) rotate(-10deg)}
+
+/* Cards become softer and more premium */
+.story-card,.invitation-card,.details-card,.final-content{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,249,244,.52)),
+    radial-gradient(circle at 15% 10%,rgba(245,220,216,.18),transparent 36%);
+  border:1px solid rgba(191,145,96,.25);
+  box-shadow:
+    0 34px 90px rgba(99,68,46,.10),
+    0 1px 0 rgba(255,255,255,.92) inset,
+    0 0 0 8px rgba(255,255,255,.13);
+}
+.story-card:before,.invitation-card:before,.details-card:before,.final-content:before{
+  border-color:rgba(194,149,95,.16);
+}
+
+/* Detail card aligned to poster reference */
+.details-card{
+  padding-top:clamp(42px,8vw,66px);
+  padding-bottom:clamp(52px,9vw,76px);
+}
+.details-card .eyebrow{margin-bottom:22px;color:#a27865}
+.details-card .date{font-size:clamp(56px,15vw,118px);letter-spacing:.035em}
+.details-card .venue{margin-top:28px}
+.details-card .time{font-size:clamp(48px,12vw,86px);margin-top:18px}
+
+/* Headings */
+.hero h1,.invitation h2,.hosts{
+  text-shadow:0 14px 30px rgba(90,57,43,.08);
+}
+.hero h1{
+  background:linear-gradient(180deg,#56382e,#9b664f 60%,#5b3b30);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.script.small{color:#7d5147}
+.body-copy,.quote{color:#4d3a32}
+
+/* Final card details */
+.final-content{
+  max-width:680px;
+  padding-top:54px;
+  padding-bottom:54px;
+}
+.final-content .eyebrow{color:#8a6b60}
+.hosts{font-size:clamp(50px,12vw,96px)}
+.final .closing{color:#9d6969}
+
+/* Decorative heart between lines */
+.divider span{font-size:12px}
+.details .divider:last-child span:before,
+.final .divider span:before{content:'♡';font-size:17px;color:#c8947d;margin-right:6px}
+
+/* subtle bokeh */
+.bokeh{
+  position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+}
+.bokeh i{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.72);box-shadow:0 0 18px rgba(255,232,213,.9);animation:bokehFloat 8s ease-in-out infinite alternate}
+.bokeh i:nth-child(1){left:12%;top:24%;animation-delay:-1s}.bokeh i:nth-child(2){left:82%;top:32%;width:7px;height:7px;animation-delay:-3s}.bokeh i:nth-child(3){left:72%;top:14%;width:13px;height:13px;animation-delay:-5s}.bokeh i:nth-child(4){left:28%;top:68%;width:6px;height:6px;animation-delay:-2s}
+@keyframes bokehFloat{from{transform:translateY(0) scale(.8);opacity:.25}to{transform:translateY(-18px) scale(1.15);opacity:.85}}
+
+@media (max-width:600px){
+  .mountain-scene{height:31%;opacity:.82}
+  .flower-cluster{width:175px;height:175px}
+  .flower-cluster.left-top{left:-58px;top:-46px}.flower-cluster.right-top{right:-58px;top:-46px}
+  .flower-cluster.left-bottom{left:-58px;bottom:-50px}.flower-cluster.right-bottom{right:-58px;bottom:-50px}
+  .flower{width:80px;height:80px}.flower.f1{left:12px;top:28px}.flower.f2{left:72px;top:12px}.flower.f3{left:82px;top:74px}.flower.f4{left:4px;top:92px}
+  .branch{left:42px;top:74px;width:105px}.branch:before,.branch:after{width:38px;height:16px}
+  .gold-sprig{display:none}
+  .details-card{padding-top:40px;padding-bottom:44px}
+}
+@media (prefers-reduced-motion:reduce){.mountain-scene .mist,.bokeh i{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -100,6 +297,9 @@
 
   <main>
     <section class="screen hero reveal" id="home">
+      <div class="mountain-scene" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="none"><defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8e7dd" stop-opacity="0"/><stop offset="1" stop-color="#ead9cf" stop-opacity=".72"/></linearGradient><linearGradient id="farG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ced1"/><stop offset="1" stop-color="#b9b1b6"/></linearGradient><linearGradient id="nearG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6a7a3"/><stop offset="1" stop-color="#8f8a8f"/></linearGradient></defs><rect width="1200" height="360" fill="url(#skyG)"/><path d="M0 235 L120 145 L200 218 L315 105 L405 216 L515 132 L610 226 L745 118 L850 215 L960 142 L1080 225 L1200 155 L1200 360 L0 360 Z" fill="url(#farG)" opacity=".55"/><path d="M0 280 L150 195 L255 268 L355 176 L490 286 L615 196 L755 279 L890 184 L1010 270 L1120 204 L1200 248 L1200 360 L0 360 Z" fill="url(#nearG)" opacity=".46"/><path d="M0 324 Q220 276 420 316 T820 307 T1200 318 L1200 360 L0 360 Z" fill="#f4eee9" opacity=".88" class="mist"/><path d="M0 344 Q250 314 440 338 T760 332 T1200 340 L1200 360 L0 360 Z" fill="#fffaf7" opacity=".9"/></svg></div>
+      <div class="flower-cluster left-top" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div><div class="flower-cluster right-top" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div>
+      <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div class="floral floral-left" aria-hidden="true"><span class="leaf"></span></div><div class="floral floral-right floral-soft" aria-hidden="true"><span class="leaf"></span></div>
       <div class="silk silk-a"></div><div class="silk silk-b"></div>
       <div class="sun-disc"></div>
@@ -118,6 +318,8 @@
     </section>
 
     <section class="screen reveal" id="story">
+      <div class="mountain-scene" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="none"><defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8e7dd" stop-opacity="0"/><stop offset="1" stop-color="#ead9cf" stop-opacity=".72"/></linearGradient><linearGradient id="farG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ced1"/><stop offset="1" stop-color="#b9b1b6"/></linearGradient><linearGradient id="nearG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6a7a3"/><stop offset="1" stop-color="#8f8a8f"/></linearGradient></defs><rect width="1200" height="360" fill="url(#skyG)"/><path d="M0 235 L120 145 L200 218 L315 105 L405 216 L515 132 L610 226 L745 118 L850 215 L960 142 L1080 225 L1200 155 L1200 360 L0 360 Z" fill="url(#farG)" opacity=".55"/><path d="M0 280 L150 195 L255 268 L355 176 L490 286 L615 196 L755 279 L890 184 L1010 270 L1120 204 L1200 248 L1200 360 L0 360 Z" fill="url(#nearG)" opacity=".46"/><path d="M0 324 Q220 276 420 316 T820 307 T1200 318 L1200 360 L0 360 Z" fill="#f4eee9" opacity=".88" class="mist"/><path d="M0 344 Q250 314 440 338 T760 332 T1200 340 L1200 360 L0 360 Z" fill="#fffaf7" opacity=".9"/></svg></div>
+      <div class="gold-sprig gs-left" aria-hidden="true"></div><div class="gold-sprig gs-right" aria-hidden="true"></div>
       <div class="silk silk-c"></div>
       <div class="pattern-band top-band" aria-hidden="true"></div>
       <div class="corner-kyrgyz tl2" aria-hidden="true"></div><div class="corner-kyrgyz br2" aria-hidden="true"></div>
@@ -129,6 +331,9 @@
     </section>
 
     <section class="screen reveal invitation" id="invite">
+      <div class="mountain-scene" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="none"><defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8e7dd" stop-opacity="0"/><stop offset="1" stop-color="#ead9cf" stop-opacity=".72"/></linearGradient><linearGradient id="farG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ced1"/><stop offset="1" stop-color="#b9b1b6"/></linearGradient><linearGradient id="nearG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6a7a3"/><stop offset="1" stop-color="#8f8a8f"/></linearGradient></defs><rect width="1200" height="360" fill="url(#skyG)"/><path d="M0 235 L120 145 L200 218 L315 105 L405 216 L515 132 L610 226 L745 118 L850 215 L960 142 L1080 225 L1200 155 L1200 360 L0 360 Z" fill="url(#farG)" opacity=".55"/><path d="M0 280 L150 195 L255 268 L355 176 L490 286 L615 196 L755 279 L890 184 L1010 270 L1120 204 L1200 248 L1200 360 L0 360 Z" fill="url(#nearG)" opacity=".46"/><path d="M0 324 Q220 276 420 316 T820 307 T1200 318 L1200 360 L0 360 Z" fill="#f4eee9" opacity=".88" class="mist"/><path d="M0 344 Q250 314 440 338 T760 332 T1200 340 L1200 360 L0 360 Z" fill="#fffaf7" opacity=".9"/></svg></div>
+      <div class="flower-cluster left-top" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div><div class="flower-cluster right-top" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div>
+      <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div class="floral floral-left floral-soft" aria-hidden="true"><span class="leaf"></span></div>
       <div class="silk silk-d"></div>
       <div class="mandala" aria-hidden="true"></div>
@@ -142,6 +347,9 @@
     </section>
 
     <section class="screen reveal details" id="details">
+      <div class="mountain-scene" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="none"><defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8e7dd" stop-opacity="0"/><stop offset="1" stop-color="#ead9cf" stop-opacity=".72"/></linearGradient><linearGradient id="farG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ced1"/><stop offset="1" stop-color="#b9b1b6"/></linearGradient><linearGradient id="nearG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6a7a3"/><stop offset="1" stop-color="#8f8a8f"/></linearGradient></defs><rect width="1200" height="360" fill="url(#skyG)"/><path d="M0 235 L120 145 L200 218 L315 105 L405 216 L515 132 L610 226 L745 118 L850 215 L960 142 L1080 225 L1200 155 L1200 360 L0 360 Z" fill="url(#farG)" opacity=".55"/><path d="M0 280 L150 195 L255 268 L355 176 L490 286 L615 196 L755 279 L890 184 L1010 270 L1120 204 L1200 248 L1200 360 L0 360 Z" fill="url(#nearG)" opacity=".46"/><path d="M0 324 Q220 276 420 316 T820 307 T1200 318 L1200 360 L0 360 Z" fill="#f4eee9" opacity=".88" class="mist"/><path d="M0 344 Q250 314 440 338 T760 332 T1200 340 L1200 360 L0 360 Z" fill="#fffaf7" opacity=".9"/></svg></div>
+      <div class="flower-cluster left-bottom" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div><div class="flower-cluster right-bottom" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div>
+      <div class="gold-sprig gs-left" aria-hidden="true"></div><div class="gold-sprig gs-right" aria-hidden="true"></div>
       <div class="floral floral-right floral-soft" aria-hidden="true"><span class="leaf"></span></div>
       <div class="glow"></div>
       <div class="pattern-band bottom-band" aria-hidden="true"></div>
@@ -157,6 +365,10 @@
     </section>
 
     <section class="screen reveal final" id="final">
+      <div class="mountain-scene" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="none"><defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8e7dd" stop-opacity="0"/><stop offset="1" stop-color="#ead9cf" stop-opacity=".72"/></linearGradient><linearGradient id="farG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ced1"/><stop offset="1" stop-color="#b9b1b6"/></linearGradient><linearGradient id="nearG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6a7a3"/><stop offset="1" stop-color="#8f8a8f"/></linearGradient></defs><rect width="1200" height="360" fill="url(#skyG)"/><path d="M0 235 L120 145 L200 218 L315 105 L405 216 L515 132 L610 226 L745 118 L850 215 L960 142 L1080 225 L1200 155 L1200 360 L0 360 Z" fill="url(#farG)" opacity=".55"/><path d="M0 280 L150 195 L255 268 L355 176 L490 286 L615 196 L755 279 L890 184 L1010 270 L1120 204 L1200 248 L1200 360 L0 360 Z" fill="url(#nearG)" opacity=".46"/><path d="M0 324 Q220 276 420 316 T820 307 T1200 318 L1200 360 L0 360 Z" fill="#f4eee9" opacity=".88" class="mist"/><path d="M0 344 Q250 314 440 338 T760 332 T1200 340 L1200 360 L0 360 Z" fill="#fffaf7" opacity=".9"/></svg></div>
+      <div class="flower-cluster left-top" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div><div class="flower-cluster right-top" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div>
+      <div class="flower-cluster left-bottom" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div><div class="flower-cluster right-bottom" aria-hidden="true"><span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span><span class="flower f4"></span><span class="branch"></span></div>
+      <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div class="floral floral-left" aria-hidden="true"><span class="leaf"></span></div><div class="floral floral-right" aria-hidden="true"><span class="leaf"></span></div>
       <div class="silk silk-e"></div>
       <div class="ornate-frame final-frame" aria-hidden="true"></div>
