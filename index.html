@@ -465,7 +465,10 @@ html{scroll-snap-type:none!important;scroll-behavior:auto}
 <body>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
   <div class="petals" id="petals" aria-hidden="true"></div>
-  <audio id="bgMusic" src="music.mp3" loop preload="metadata"></audio>
+  <audio id="bgMusic" loop preload="metadata">
+    <source src="music.m4a" type="audio/mp4">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
 
   <main>
     <section class="screen hero reveal" id="home">
@@ -604,7 +607,7 @@ function spawnPetal(){
 }
 setInterval(spawnPetal,1200);for(let i=0;i<5;i++)setTimeout(spawnPetal,i*450);
 
-// Background music. Upload a file named music.mp3 next to index.html on GitHub Pages.
+// Background music. Preferred file: music.m4a next to index.html; music.mp3 is a fallback.
 const ambienceBtn=document.querySelector('#ambienceBtn');
 const soundLabel=document.querySelector('#soundLabel');
 const bgMusic=document.querySelector('#bgMusic');
@@ -631,11 +634,11 @@ ambienceBtn.addEventListener('click',async()=>{
     ambienceOn=false;
     ambienceBtn.classList.remove('active');
     ambienceBtn.setAttribute('aria-pressed','false');
-    soundLabel.textContent='music.mp3 жок';
+    soundLabel.textContent='Музыка табылган жок';
   }
 });
 
-bgMusic.addEventListener('error',()=>{soundLabel.textContent='music.mp3 жок'});
+bgMusic.addEventListener('error',()=>{soundLabel.textContent='Музыка табылган жок'});
 
 // Pointer tilt removed for smoother scrolling.
 
