@@ -809,6 +809,75 @@ body.intro-lock{overflow:hidden!important}
   #luxuryIntro .intro-seal{width:150px!important}
 }
 
+
+/* ===== МОЯ ИСТОРИЯ — личная фотоглава ===== */
+.life-story{
+  min-height:auto !important;
+  padding:76px 18px 86px !important;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(255,255,255,.75),transparent 28%),
+    linear-gradient(180deg,#f7ebe5 0%,#f2ddd4 48%,#f8eee9 100%);
+  overflow:hidden;
+}
+.life-story:before,.life-story:after{
+  content:"";
+  position:absolute;
+  width:190px;height:190px;border-radius:50%;
+  border:1px solid rgba(174,126,116,.16);
+  pointer-events:none;
+}
+.life-story:before{left:-105px;top:105px}
+.life-story:after{right:-115px;bottom:75px}
+.life-story-inner{width:min(100%,520px);margin:0 auto;position:relative;z-index:1}
+.life-story-head{text-align:center;margin:0 auto 48px}
+.life-story-kicker{margin:0 0 10px;font-size:10px;letter-spacing:.26em;color:#9d746b}
+.life-story-title{margin:0;color:#5e3e39;font-size:clamp(38px,10vw,56px);font-weight:400;line-height:1.05}
+.life-story-sub{max-width:330px;margin:16px auto 0;color:#866660;font-size:14px;line-height:1.7}
+.life-chapter{margin:0 0 56px}
+.life-chapter:last-child{margin-bottom:0}
+.chapter-label{display:flex;align-items:center;gap:12px;margin:0 0 17px;color:#a1786e;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+.chapter-label:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(161,120,110,.5),transparent)}
+.photo-flow{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.memory-photo{margin:0;position:relative;overflow:hidden;border-radius:24px;background:#eadbd4;box-shadow:0 15px 35px rgba(88,54,49,.15);cursor:pointer;opacity:0;transform:translateY(22px) scale(.985);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+.memory-photo.show{opacity:1;transform:translateY(0) scale(1)}
+.memory-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.memory-photo:hover img{transform:scale(1.025)}
+.memory-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 35%,rgba(67,39,35,.08));pointer-events:none}
+.memory-photo.portrait{grid-column:span 7;height:350px}
+.memory-photo.small{grid-column:span 5;height:260px;margin-top:42px}
+.memory-photo.wide{grid-column:span 12;height:360px}
+.memory-photo.left{grid-column:span 5;height:270px}
+.memory-photo.right{grid-column:span 7;height:360px;margin-top:25px}
+.memory-photo.full{grid-column:span 12;height:430px}
+.memory-photo.delay-1{transition-delay:.08s}.memory-photo.delay-2{transition-delay:.16s}
+.memory-photo.delay-3{transition-delay:.24s}.memory-photo.delay-4{transition-delay:.32s}
+.memory-photo.delay-5{transition-delay:.4s}
+.life-flower{position:absolute;font-size:46px;color:rgba(255,255,255,.65);filter:drop-shadow(0 8px 12px rgba(110,76,70,.08));pointer-events:none}
+.life-flower.one{left:-6px;top:150px;transform:rotate(-18deg)}
+.life-flower.two{right:-4px;bottom:150px;transform:rotate(18deg)}
+.memory-photo:focus-visible{outline:3px solid rgba(164,115,103,.55);outline-offset:4px}
+.photo-lightbox{position:fixed;inset:0;z-index:99999;background:rgba(42,29,27,.93);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
+.photo-lightbox.active{opacity:1;visibility:visible}
+.photo-lightbox img{max-width:100%;max-height:90vh;border-radius:18px;box-shadow:0 28px 80px rgba(0,0,0,.45);transform:scale(.96);transition:transform .35s ease}
+.photo-lightbox.active img{transform:scale(1)}
+.photo-lightbox button{position:absolute;right:18px;top:18px;width:46px;height:46px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:28px;cursor:pointer}
+@media(max-width:430px){
+  .life-story{padding:62px 14px 72px !important}
+  .life-story-head{margin-bottom:38px}
+  .photo-flow{gap:9px}
+  .memory-photo{border-radius:19px}
+  .memory-photo.portrait{height:300px}
+  .memory-photo.small{height:225px;margin-top:34px}
+  .memory-photo.wide{height:310px}
+  .memory-photo.left{height:225px}
+  .memory-photo.right{height:310px;margin-top:18px}
+  .memory-photo.full{height:390px}
+}
+@media(prefers-reduced-motion:reduce){
+  .memory-photo,.memory-photo img,.photo-lightbox,.photo-lightbox img{transition:none!important}
+  .memory-photo{opacity:1;transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -869,6 +938,57 @@ body.intro-lock{overflow:hidden!important}
         <span class="mini-symbol">✦</span>
       </div>
     </section>
+
+
+    <!-- ===== МЕНИН БАЯНЫМ: жеке сүрөттөр ===== -->
+    <section class="screen reveal life-story" id="lifeStory">
+      <div class="life-story-inner">
+        <span class="life-flower one" aria-hidden="true">✿</span>
+        <span class="life-flower two" aria-hidden="true">✿</span>
+        <div class="life-story-head">
+          <p class="life-story-kicker">МЕНИН ЭСКЕРҮҮЛӨРҮМ</p>
+          <h2 class="life-story-title">Менин баяным</h2>
+          <p class="life-story-sub">Алгачкы жылуу эскерүүлөрүмдөн тартып, жашоомдун жаңы жана эң сонун барагына чейин.</p>
+        </div>
+
+        <div class="life-chapter">
+          <p class="chapter-label">Балалык чагым</p>
+          <div class="photo-flow">
+            <figure class="memory-photo portrait"><img src="IMG_4465.JPG" alt="Балалыктагы эскерүү" loading="lazy"></figure>
+            <figure class="memory-photo small delay-1"><img src="IMG_4466.JPG" alt="Балалык сүрөт" loading="lazy"></figure>
+            <figure class="memory-photo wide delay-2"><img src="IMG_4467.JPG" alt="Балалыктагы жылуу эскерүү" loading="lazy"></figure>
+            <figure class="memory-photo small delay-3"><img src="IMG_4468.JPG" alt="Атам менен балалыктагы эскерүү" loading="lazy"></figure>
+          </div>
+        </div>
+
+        <div class="life-chapter">
+          <p class="chapter-label">Бир аз чоңойгондо</p>
+          <div class="photo-flow">
+            <figure class="memory-photo right delay-1"><img src="IMG_4469.JPG" alt="Менин чоңоюу жолум" loading="lazy"></figure>
+          </div>
+        </div>
+
+        <div class="life-chapter">
+          <p class="chapter-label">Жаңы кыялдар</p>
+          <div class="photo-flow">
+            <figure class="memory-photo wide"><img src="IMG_4470.JPG" alt="Өспүрүм курактагы эскерүү" loading="lazy"></figure>
+          </div>
+        </div>
+
+        <div class="life-chapter">
+          <p class="chapter-label">Бүгүн</p>
+          <div class="photo-flow">
+            <figure class="memory-photo full"><img src="IMG_5879.JPG" alt="Азыркы сүрөт" loading="lazy"></figure>
+            <figure class="memory-photo wide delay-1"><img src="IMG_8597.JPG" alt="Мен бүгүн" loading="lazy"></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="photo-lightbox" id="photoLightbox" aria-hidden="true">
+      <button type="button" aria-label="Закрыть фотографию">×</button>
+      <img src="" alt="">
+    </div>
 
     <section class="screen reveal invitation" id="invite">
       <div class="mountain-scene" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="none"><defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8e7dd" stop-opacity="0"/><stop offset="1" stop-color="#ead9cf" stop-opacity=".72"/></linearGradient><linearGradient id="farG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ced1"/><stop offset="1" stop-color="#b9b1b6"/></linearGradient><linearGradient id="nearG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6a7a3"/><stop offset="1" stop-color="#8f8a8f"/></linearGradient></defs><rect width="1200" height="360" fill="url(#skyG)"/><path d="M0 235 L120 145 L200 218 L315 105 L405 216 L515 132 L610 226 L745 118 L850 215 L960 142 L1080 225 L1200 155 L1200 360 L0 360 Z" fill="url(#farG)" opacity=".55"/><path d="M0 280 L150 195 L255 268 L355 176 L490 286 L615 196 L755 279 L890 184 L1010 270 L1120 204 L1200 248 L1200 360 L0 360 Z" fill="url(#nearG)" opacity=".46"/><path d="M0 324 Q220 276 420 316 T820 307 T1200 318 L1200 360 L0 360 Z" fill="#f4eee9" opacity=".88" class="mist"/><path d="M0 344 Q250 314 440 338 T760 332 T1200 340 L1200 360 L0 360 Z" fill="#fffaf7" opacity=".9"/></svg></div>
@@ -1082,5 +1202,30 @@ if(bgMusic){
 })();
 </script>
 
+<script>
+
+// Personal photo story
+(function(){
+  const photos=[...document.querySelectorAll('.memory-photo')];
+  const lb=document.getElementById('photoLightbox');
+  if(!photos.length||!lb)return;
+  const lbImg=lb.querySelector('img');
+  const close=()=>{lb.classList.remove('active');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  const photoObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('show');photoObserver.unobserve(entry.target);}});
+  },{threshold:.16});
+  photos.forEach(photo=>{
+    photoObserver.observe(photo);
+    photo.tabIndex=0;
+    const open=()=>{const img=photo.querySelector('img');lbImg.src=img.currentSrc||img.src;lbImg.alt=img.alt;lb.classList.add('active');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';};
+    photo.addEventListener('click',open);
+    photo.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  });
+  lb.querySelector('button').addEventListener('click',close);
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+
+</script>
 </body>
 </html>
