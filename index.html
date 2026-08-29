@@ -878,6 +878,12 @@ body.intro-lock{overflow:hidden!important}
   .memory-photo{opacity:1;transform:none}
 }
 
+
+/* Фото-плейсхолдеры: если файл ещё не загружен в папку photos */
+.memory-photo img[src^="photos/"]{
+  background:linear-gradient(135deg,#ead8d1,#f7efea);
+}
+
 </style>
 </head>
 <body>
@@ -953,33 +959,41 @@ body.intro-lock{overflow:hidden!important}
 
         <div class="life-chapter">
           <p class="chapter-label">Балалык чагым</p>
+          <!--
+  ФОТОЛОРДУ КАНТИП КОШОСУЗ:
+  index.html файлынын жанындагы "photos" папкасына сүрөттөрүңүздү жүктөңүз.
+  Файл аттары так ушундай болушу керек:
+  photo-01.jpg, photo-02.jpg, photo-03.jpg, photo-04.jpg,
+  photo-05.jpg, photo-06.jpg, photo-07.jpg, photo-08.jpg
+  Ар бир сүрөттүн ID'си data-photo-id аркылуу белгиленген.
+-->
           <div class="photo-flow">
-            <figure class="memory-photo portrait"><img src="IMG_4465.JPG" alt="Балалыктагы эскерүү" loading="lazy"></figure>
-            <figure class="memory-photo small delay-1"><img src="IMG_4466.JPG" alt="Балалык сүрөт" loading="lazy"></figure>
-            <figure class="memory-photo wide delay-2"><img src="IMG_4467.JPG" alt="Балалыктагы жылуу эскерүү" loading="lazy"></figure>
-            <figure class="memory-photo small delay-3"><img src="IMG_4468.JPG" alt="Атам менен балалыктагы эскерүү" loading="lazy"></figure>
+            <figure class="memory-photo portrait" id="photo-01"><img src="photos/photo-01.jpg" data-photo-id="photo-01" alt="Балалыктагы эскерүү" loading="lazy"></figure>
+            <figure class="memory-photo small delay-1" id="photo-02"><img src="photos/photo-02.jpg" data-photo-id="photo-02" alt="Балалык сүрөт" loading="lazy"></figure>
+            <figure class="memory-photo wide delay-2" id="photo-03"><img src="photos/photo-03.jpg" data-photo-id="photo-03" alt="Балалыктагы жылуу эскерүү" loading="lazy"></figure>
+            <figure class="memory-photo small delay-3" id="photo-04"><img src="photos/photo-04.jpg" data-photo-id="photo-04" alt="Атам менен балалыктагы эскерүү" loading="lazy"></figure>
           </div>
         </div>
 
         <div class="life-chapter">
           <p class="chapter-label">Бир аз чоңойгондо</p>
           <div class="photo-flow">
-            <figure class="memory-photo right delay-1"><img src="IMG_4469.JPG" alt="Менин чоңоюу жолум" loading="lazy"></figure>
+            <figure class="memory-photo right delay-1" id="photo-05"><img src="photos/photo-05.jpg" data-photo-id="photo-05" alt="Менин чоңоюу жолум" loading="lazy"></figure>
           </div>
         </div>
 
         <div class="life-chapter">
           <p class="chapter-label">Жаңы кыялдар</p>
           <div class="photo-flow">
-            <figure class="memory-photo wide"><img src="IMG_4470.JPG" alt="Өспүрүм курактагы эскерүү" loading="lazy"></figure>
+            <figure class="memory-photo wide" id="photo-06"><img src="photos/photo-06.jpg" data-photo-id="photo-06" alt="Өспүрүм курактагы эскерүү" loading="lazy"></figure>
           </div>
         </div>
 
         <div class="life-chapter">
           <p class="chapter-label">Бүгүн</p>
           <div class="photo-flow">
-            <figure class="memory-photo full"><img src="IMG_5879.JPG" alt="Азыркы сүрөт" loading="lazy"></figure>
-            <figure class="memory-photo wide delay-1"><img src="IMG_8597.JPG" alt="Мен бүгүн" loading="lazy"></figure>
+            <figure class="memory-photo full" id="photo-07"><img src="photos/photo-07.jpg" data-photo-id="photo-07" alt="Азыркы сүрөт" loading="lazy"></figure>
+            <figure class="memory-photo wide delay-1" id="photo-08"><img src="photos/photo-08.jpg" data-photo-id="photo-08" alt="Мен бүгүн" loading="lazy"></figure>
           </div>
         </div>
       </div>
